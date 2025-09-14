@@ -1,0 +1,16 @@
+order_id,customer_id,order_date,order_revenue,utm_source,utm_medium,utm_campaign
+1001,C001,2025-05-10,120.50,google,cpc,spring_sale
+1002,C002,2025-05-11,75.00,facebook,paid,spring_sale
+1003,C001,2025-05-20,98.00,google,cpc,retargeting
+1004,C003,2025-05-21,150.00,tiktok,paid,summer_launch
+1005,C004,2025-05-22,60.00,facebook,paid,brand_awareness
+1006,C005,2025-05-23,180.00,google,cpc,retargeting
+1007,C002,2025-05-25,90.00,facebook,paid,summer_launch
+1008,C006,2025-05-26,200.00,tiktok,paid,summer_launch
+1009,C003,2025-05-28,130.00,google,cpc,retargeting
+1010,C007,2025-05-30,85.00,facebook,paid,brand_awareness
+1011,C008,2025-06-01,240.00,google,cpc,summer_launch
+1012,C004,2025-06-02,70.00,facebook,paid,retargeting
+1013,C009,2025-06-03,110.00,tiktok,paid,summer_launch
+1014,C002,2025-06-05,95.00,facebook,paid,summer_launch
+1015,C010,2025-06-06,150.00,google,cpc,summer_launch
