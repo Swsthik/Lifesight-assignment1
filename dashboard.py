@@ -46,8 +46,6 @@ Analytics Capabilities:
 
 Author: Marketing Analytics Team
 Version: 2.0 (Prophet Integration)
-"""
-Version: 2.0
 Last Updated: September 2025
 """
 
@@ -439,6 +437,7 @@ if use_upload:
     # Load uploaded files into DataFrames with proper date parsing
     fb = pd.read_csv(fb_file, parse_dates=['date'])
     g = pd.read_csv(g_file, parse_dates=['date'])
+    tt = pd.read_csv(tt_file, parse_dates=['date'])
     b = pd.read_csv(b_file, parse_dates=['date'])
     
     # Add channel identification to each platform's data
@@ -704,7 +703,7 @@ fig.update_layout(
     hovermode='x unified'
 )
 
-st.plotly_chart(fig, use_container_width=True)
+st.plotly_chart(fig, width='stretch')
 
 # ========================================================================
 # PROPHET FORECASTING SECTION
@@ -789,7 +788,7 @@ if PROPHET_AVAILABLE and len(orders_series.dropna()) >= 30:
             yaxis_title="📊 Orders",
             hovermode='x unified'
         )
-        st.plotly_chart(figo, use_container_width=True)
+        st.plotly_chart(figo, width='stretch')
     else:
         st.info("ℹ️ Not enough history to run a robust Prophet model for orders. Falling back to moving-average.")
         fo = moving_average_forecast(orders_series, periods=7, forecast_horizon=forecast_horizon)
@@ -797,7 +796,7 @@ if PROPHET_AVAILABLE and len(orders_series.dropna()) >= 30:
         figo.add_trace(go.Scatter(mode='lines', x=orders_series.index, y=orders_series.values, name='📊 Historical Orders'))
         figo.add_trace(go.Scatter(mode='lines', x=fo['ds'], y=fo['yhat'], name='📈 MA Forecast', line=dict(dash='dash')))
         figo.update_layout(title="🛒 Orders — Moving Average Forecast", xaxis_title="📅 Date", yaxis_title="📊 Orders")
-        st.plotly_chart(figo, use_container_width=True)
+        st.plotly_chart(figo, width='stretch')
 else:
     # Fallback to moving average forecast when Prophet is unavailable
     fo = moving_average_forecast(orders_series, periods=7, forecast_horizon=forecast_horizon)
@@ -805,7 +804,7 @@ else:
     figo.add_trace(go.Scatter(mode='lines', x=orders_series.index, y=orders_series.values, name='📊 Historical Orders'))
     figo.add_trace(go.Scatter(mode='lines', x=fo['ds'], y=fo['yhat'], name='📈 MA Forecast', line=dict(dash='dash')))
     figo.update_layout(title="🛒 Orders — Moving Average Forecast", xaxis_title="📅 Date", yaxis_title="📊 Orders")
-    st.plotly_chart(figo, use_container_width=True)
+    st.plotly_chart(figo, width='stretch')
 
 # ========================================================================
 # REVENUE FORECASTING  
@@ -864,7 +863,7 @@ if PROPHET_AVAILABLE and len(revenue_series.dropna()) >= 30:
             yaxis_title="💵 Revenue ($)",
             hovermode='x unified'
         )
-        st.plotly_chart(figr, use_container_width=True)
+        st.plotly_chart(figr, width='stretch')
     else:
         st.info("ℹ️ Not enough history to run a robust Prophet model for revenue. Falling back to moving-average.")
         fr = moving_average_forecast(revenue_series, periods=7, forecast_horizon=forecast_horizon)
@@ -872,7 +871,7 @@ if PROPHET_AVAILABLE and len(revenue_series.dropna()) >= 30:
         figr.add_trace(go.Scatter(mode='lines', x=revenue_series.index, y=revenue_series.values, name='💵 Historical Revenue'))
         figr.add_trace(go.Scatter(mode='lines', x=fr['ds'], y=fr['yhat'], name='📈 MA Forecast', line=dict(dash='dash')))
         figr.update_layout(title="💵 Revenue — Moving Average Forecast", xaxis_title="📅 Date", yaxis_title="💵 Revenue ($)")
-        st.plotly_chart(figr, use_container_width=True)
+        st.plotly_chart(figr, width='stretch')
 else:
     # Fallback to moving average forecast when Prophet is unavailable
     fr = moving_average_forecast(revenue_series, periods=7, forecast_horizon=forecast_horizon)
@@ -880,7 +879,7 @@ else:
     figr.add_trace(go.Scatter(mode='lines', x=revenue_series.index, y=revenue_series.values, name='💵 Historical Revenue'))
     figr.add_trace(go.Scatter(mode='lines', x=fr['ds'], y=fr['yhat'], name='📈 MA Forecast', line=dict(dash='dash')))
     figr.update_layout(title="💵 Revenue — Moving Average Forecast", xaxis_title="📅 Date", yaxis_title="💵 Revenue ($)")
-    st.plotly_chart(figr, use_container_width=True)
+    st.plotly_chart(figr, width='stretch')
 
 # ========================================================================
 # CAMPAIGN PERFORMANCE ANALYSIS
@@ -911,7 +910,7 @@ fig_ch = px.bar(
     labels={'value': 'Amount ($)', 'channel': 'Marketing Channel', 'metric': 'Metric Type'}
 )
 fig_ch.update_layout(hovermode='x unified')
-st.plotly_chart(fig_ch, use_container_width=True)
+st.plotly_chart(fig_ch, width='stretch')
 
 # ========================================================================
 # CAMPAIGN-LEVEL PERFORMANCE
@@ -940,7 +939,7 @@ st.dataframe(
         'impressions':'{:,.0f}',
         'clicks':'{:,.0f}'
     }),
-    use_container_width=True
+    width='stretch'
 )
 
 # ========================================================================
